@@ -1,0 +1,79 @@
+public class SpachesipMove : MonoBehaviour
+
+
+    
+{
+    public float speed;
+    private float moveSpeed = 50f;
+    // Start is called before the first frame update
+    [SerializeField] Text ALERTA;
+    public Text Tiempo;
+    public GameObject Alarma;
+    public Text alerta;
+
+    [SerializeField] MeshRenderer Sphere;
+
+    void Start()
+    {
+        
+        Alarma.SetActive(false);
+        CuentaTiempo();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        MoverNave();
+    }
+
+    void MoverNave()
+    {
+        float desplX = Input.GetAxis("Horizontal");
+        float desplY = Input.GetAxis("Subir");
+        float desplY2 = Input.GetAxis("Bajar");
+        float desplZ = Input.GetAxis("Adelante");
+        float desplRot = Input.GetAxis("RS");
+        float myPosX = transform.position.x;
+        float myPosY = transform.position.y;
+        float myPosZ = transform.position.z;
+        float myPosY2 = transform.position.y;
+        
+        
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * desplX);
+        transform.Translate(Vector3.up* Time.deltaTime* moveSpeed * desplY);
+        transform.Translate(Vector3.down * Time.deltaTime * moveSpeed * desplY2);
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * desplZ);
+        transform.Rotate(Vector3.left * Time.deltaTime * moveSpeed * desplRot);
+
+    }
+
+    void checkRestrX(float myPosZ, float desplZ)
+    {
+        if( myPosZ <-181 && desplZ<0)
+        {
+            Panel();
+        }
+    }
+
+    private void  Panel()
+    {
+       ALERTA.text = "ALERTA";
+        Alarma.SetActive(true);
+    }
+
+    private void CuentaTiempo()
+    {
+        //Submetodo q nos devuelve el tiempo que ha pasado en segundos
+        Tiempo.text = "TIEMPO" + Time.time;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Sphere")
+        {
+            //que desaparezca la malla de la nave
+            Sphere.enabled = false;
+        }
+    }
+}

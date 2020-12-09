@@ -1,0 +1,35 @@
+{
+    public float speed;
+    private float moveSpeed = 3f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        MoverNave();
+    }
+
+    void MoverNave()
+    {
+        float desplX = Input.GetAxis("Horizontal");
+        float desplY = Input.GetAxis("Subir");
+        float desplY2 = Input.GetAxis("Bajar");
+        float desplZ = Input.GetAxis("Adelante");
+        float desplRot = Input.GetAxis("RS");
+        float myPosX = transform.position.x;
+        float myPosY = transform.position.y;
+        float myPosY2 = transform.position.y;
+        float myPosZ = transform.position.z;
+        
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * desplX);
+        transform.Translate(Vector3.up* Time.deltaTime* moveSpeed * desplY);
+        transform.Translate(Vector3.down * Time.deltaTime * moveSpeed * desplY2);
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * desplZ);
+        transform.Rotate(Vector3.left * Time.deltaTime * moveSpeed * desplRot);
+
+    }
+}

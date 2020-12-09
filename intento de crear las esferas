@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ObstacelCreator : MonoBehaviour
+{
+    // Start is called before the first frame update
+    [SerializeField] GameObject Sphere;
+
+    //Variable que tiene la posición del objeto de referencia
+   
+
+    //Variables para generar columnas de forma random
+    private float randomNumber;
+    Vector3 RandomPos;
+
+    
+   
+
+    //Acceder a los componentes de la nave
+    public GameObject Spaceship;
+    private SpachesipMove spaceshipMove;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+       
+        spaceshipMove = Spaceship.GetComponent<SpachesipMove>();
+        //Creo las esferas
+        for (int n = 1; n == 20; n++)
+        {
+
+            CrearEsfera();
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    void CrearEsfera()
+    {
+        randomNumber = Random.Range(0f, 20f);
+        RandomPos = new Vector3(randomNumber, randomNumber, randomNumber);
+        //print(RandomPos);
+       
+      
+    }
